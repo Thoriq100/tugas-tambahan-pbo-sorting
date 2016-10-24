@@ -1,0 +1,88 @@
+import java.util.Scanner;
+import java.util.*;
+/*
+ *tambahan:
+ * > terapkan keyword final & static
+ * > jadikan 3 objek
+ * > protected
+ *
+*/
+ 
+class Data {
+	private int i, j, temp;
+	protected int[] data;
+	//modifier protected agar variabel diatas tetap dapat diakses oleh anak classnya
+	
+	//method / fungsi pengurutan data menggunakan Bubble Sort
+	public final void pengurutanData (int[] nilai, int n) {
+		/*
+		 *penggunaan keyword final, karena proses pengurutan data (sorting)
+		 *menggunakan "bubble sort" adalah sebuah metode yang mutlak
+		*/
+		
+		for (i=0; i<n-1; i++) { 
+	       for (j=0; j<n-i-1; j++) {
+	           if (nilai[j] > nilai[j+1]) {
+	           	  temp = nilai[j];
+				  nilai[j] = nilai[j+1];
+				  nilai[j+1] = temp;
+	           }
+	       }
+		}
+	}
+	
+}
+
+class Deret extends Data {
+	static int i;
+	
+	//konstruktor untuk menyimpan nilai yang dimasukkan
+	public Deret (int[] nilai) {
+		super.data = nilai;
+	}
+	
+	public Deret () {
+		
+	}
+	
+	//method untuk menampilkan data setelah diurutkan
+	public void cetakData(int[] data, int n) {
+		System.out.print("\noutput = ");
+		for (i=0; i<n; i++) {
+			System.out.print(data[i] + " ");
+		}
+	}
+}
+
+//==== Main Program ====
+public class AgilMod1_Sorting {
+    
+    public static void main(String[] args) {
+    	
+    	//deklarasi object
+    	Scanner in = new Scanner(System.in);
+    	Deret deretNilai = new Deret(); //objek 1
+    	Data sorting = new Data(); //objek 2
+    	
+    	//deklarasi variabel
+    	int[] data = new int[10];
+    	int i, j, jum_data;
+    	
+    	//masukkan nilai
+    	System.out.print("Input Jumlah Data = ");
+    	jum_data = in.nextInt();
+    	
+    	//masukkan nilai yang ke-i
+    	for (i=0; i<jum_data; i++) {
+    		System.out.print("input " + (i+1) + " = ");
+    		data[i] = in.nextInt();
+    		Deret dataku = new Deret(data); //objek 3
+    	}
+    	
+    	//panggil method pengurutanData()
+    	sorting.pengurutanData(data, jum_data);
+    	
+    	//panggil method cetakData()
+    	deretNilai.cetakData(data, jum_data);
+    }
+}
